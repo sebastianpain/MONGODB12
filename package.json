@@ -1,0 +1,22 @@
+{
+  "name": "mongodb12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "-": "^0.0.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "handlebars": "^4.7.7",
+    "mongoose": "^7.3.1",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.7.1"
+  }
+}
