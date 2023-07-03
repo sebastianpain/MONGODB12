@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
+const productsRouter = require('./routers/products.router');
+const cartsRouter = require('./routers/carts.router');
 const PORT = process.env.PORT || 8080
 //config Socket IO
 const http =require('http');
@@ -22,14 +24,19 @@ app.set('views',__dirname+'/views')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
+
 //app.use ('/home', routerHome)
+
 //app.use('/', productsRouter);
 
 //Rutas
 
-//app.use(productsRouter)
-//app.use(cartsRouter) 
-
+//app.get('/api/products',(req,res)=>{
+  //  res.send('ok')
+//})
+app.use(productsRouter);
+app.use(cartsRouter);
+app.use(express.static(__dirname+'/public'))
 io.on('connection',(socket)=>{
     console.log("conexion exitosa")
 })
@@ -48,4 +55,3 @@ server.listen(8080,()=>{
     //ejecuto la base de datos
     Database.connect()
 })
-//
