@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
+const homeRouter= require('./routers/home.router');
 const productsRouter = require('./routers/products.router');
 const cartsRouter = require('./routers/carts.router');
 const PORT = process.env.PORT || 8080
@@ -25,18 +26,27 @@ app.set('views',__dirname+'/views')
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
-//app.use ('/home', routerHome)
+app.use('/home',homeRouter);
+app.use('/api/products',productsRouter);
+app.use('/api/carts',cartsRouter);
 
-//app.use('/', productsRouter);
+let mensajes = []
+//logica de websocket
+io.on('conection',(socket)=>{
+    console.log('nuevo usuario conectado')
+    io.sockets.emit('new-message',(data)=>{
+        console.log(data)
+        mensajes.push(data)
+        io.sockets.emit('memssages-all',mensajes)
 
-//Rutas
+})
 
-//app.get('/api/products',(req,res)=>{
-  //  res.send('ok')
-//})
-app.use(productsRouter);
-app.use(cartsRouter);
 app.use(express.static(__dirname+'/public'))
+//views
+app.engine('handlebars',handlebars.engine())
+app.set('view engine','handlebars')
+app.set('views',__dirname+'/views')
+
 io.on('connection',(socket)=>{
     console.log("conexion exitosa")
 })
@@ -54,4 +64,4 @@ server.listen(8080,()=>{
     console.log('servidor en el puerto 8080!!');
     //ejecuto la base de datos
     Database.connect()
-})
+})});
