@@ -6,7 +6,7 @@ class CartManager {
         this.patch=patch;
 
     }
-    async getAllProducts(){
+    async getAllCart(){
         try{
             const pr= await fs.promises.readFile(this.patch,"utf-8");
             const prParse=JSON.parse(pr);
@@ -19,7 +19,7 @@ class CartManager {
             throw new Error("error al leer el archivo " + error)
         }
     }
-    async getAllProducts(id){
+    async getAllCart(id){
         try{
             const pr=await fs.promises.readFile(this.patch,"utf-8");
             const prParse =JSON.parse(pr);
