@@ -1,24 +1,21 @@
 
-const fs = require("fs");
 
+const { readFile } = require("fs").promises;
 class CartManager {
     constructor(patch){
         this.patch=patch;
 
     }
-    async getAllCart(){
-        try{
-            const pr= await fs.promises.readFile(this.patch,"utf-8");
-            const prParse=JSON.parse(pr);
-            if(prParse.length<=0){
-                return"no hay productos en la base de datos";
-                }else{
-                    return prParse;
-            }
-        }catch(error){
-            throw new Error("error al leer el archivo " + error)
-        }
+   asyncgetAllCart(id) {
+    try {
+const fileContents = await.readFile(this.path, "utf-8");
+// Resto del código...
+    } catch (error) {
+thrownewError("Error al leer el archivo: " + error.message);
     }
+}
+      
+    
     async getAllCart(id){
         try{
             const pr=await fs.promises.readFile(this.patch,"utf-8");
